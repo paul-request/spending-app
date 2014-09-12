@@ -1,0 +1,25 @@
+<ion-nav-bar animation="no-animation">
+  <ion-nav-buttons side="left">
+    <button class="button button-positive button-clear no-animation" ng-click="startApp()" ng-if="!slideIndex">Skip Intro</button>
+    <button class="button button-positive button-clear no-animation" ng-click="previous()" ng-if="slideIndex > 0"><i class="icon ion-chevron-left"></i> Previous</button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right"> 
+    <button class="button button-positive button-clear no-animation" ng-click="next()" ng-if="slideIndex != 2">Next <i class="icon ion-chevron-right"></i> </button>
+    <button class="button button-positive button-clear no-animation" ng-click="startApp()" ng-if="slideIndex == 2">Start using MyApp <i class="icon ion-chevron-right"></i> </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view class="pane" animation="no-animation">
+  <ion-content class="has-header">
+    <ion-slide-box on-slide-changed="slideChanged(index)" class="walkthrough">
+      <ion-slide>
+        <h3>Slide 1</h3>
+      </ion-slide>
+      <ion-slide>
+        <h3>Slide 2</h3>
+      </ion-slide>
+      <ion-slide>
+        <h3>Slide 3</h3>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>

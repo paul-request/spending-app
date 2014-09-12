@@ -1,0 +1,22 @@
+/**
+ * Bar (Headers and Footers)
+ * --------------------------------------------------
+ */
+
+.bar {
+	&.bar-brand {
+		background-color: $brand-primary;
+	}
+
+	&.bar-header {
+		padding: 0;
+	}
+
+	.title {
+		&+ .right-buttons {
+			top: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+}

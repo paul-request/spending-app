@@ -1,0 +1,63 @@
+/**
+ * Buttons
+ * --------------------------------------------------
+ */
+
+.button {
+	border: none;
+	border-radius: 0;
+
+	&.brand-primary {
+		&.activated {
+			@include button-style($brand-primary, $brand-light);
+		}
+
+		&:hover {
+			@include button-style($brand-primary, $brand-light);
+		}
+	}
+
+	&.brand-secondary {
+		&.activated {
+			@include button-style($brand-secondary, $brand-light);
+		}
+
+		&:hover {
+			@include button-style($brand-secondary, $brand-light);
+		}
+	}
+
+	&.brand-tertiary {
+		&.activated {
+			@include button-style($brand-tertiary, $brand-light);
+		}
+
+		&:hover {
+			@include button-style($brand-tertiary, $brand-light);
+		}
+	}
+
+	.bar & {
+		&.back-button {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			height: 44px;
+			width: 44px;
+
+			.icon {
+				&:before {
+					font-size: 22px;
+					line-height: 24px;
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}
+
+.button-icon.button.active, 
+.button-icon.button.activated {
+	opacity: 1;
+}

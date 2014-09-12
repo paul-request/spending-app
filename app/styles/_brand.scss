@@ -1,0 +1,14 @@
+/**
+ * Buttons
+ * --------------------------------------------------
+ */
+ 
+.brand-primary {
+	@include button-style($brand-primary, $brand-light);
+}
+.brand-secondary {
+	@include button-style($brand-secondary, $brand-light);
+}
+.brand-tertiary {
+	@include button-style($brand-tertiary, $brand-light);
+}
