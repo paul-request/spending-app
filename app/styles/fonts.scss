@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'montserratregular';
+    src: url('/fonts/Montserrat-Regular-webfont.eot');
+    src: url('/fonts/Montserrat-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Montserrat-Regular-webfont.woff') format('woff'),
+         url('/fonts/Montserrat-Regular-webfont.ttf') format('truetype'),
+         url('/fonts/Montserrat-Regular-webfont.svg#montserratregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'overpassregular';
+    src: url('/fonts/Overpass_Regular-webfont.eot');
+    src: url('/fonts/Overpass_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Overpass_Regular-webfont.woff') format('woff'),
+         url('/fonts/Overpass_Regular-webfont.ttf') format('truetype'),
+         url('/fonts/Overpass_Regular-webfont.svg#overpassregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'overpassbold';
+    src: url('/fonts/Overpass_Bold-webfont.eot');
+    src: url('/fonts/Overpass_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/Overpass_Bold-webfont.woff') format('woff'),
+         url('/fonts/Overpass_Bold-webfont.ttf') format('truetype'),
+         url('/fonts/Overpass_Bold-webfont.svg#overpassregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

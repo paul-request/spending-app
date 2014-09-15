@@ -1,14 +1,30 @@
 /**
- * Buttons
+ * Brand
  * --------------------------------------------------
  */
+
+ body {
+ 	font-family: 'montserratregular', Arial, sans-serif;
+ }
+
+ h1,h2,h3,h4,h5,h6 {
+ 	text-transform: uppercase;
+ 	font-family: 'overpassregular', Arial, sans-serif;
+ }
+.main-title {
+ 	text-transform: uppercase;
+ 	font-family: 'overpassbold', Arial, sans-serif;
+ 	font-weight: bold;
+ 	font-size: 16px;
+ 	text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+ }
  
 .brand-primary {
-	@include button-style($brand-primary, $brand-light);
+	@include button-style($brand-primary, #fff);
 }
 .brand-secondary {
-	@include button-style($brand-secondary, $brand-light);
+	@include button-style($brand-secondary, #fff);
 }
 .brand-tertiary {
-	@include button-style($brand-tertiary, $brand-light);
+	@include button-style($brand-tertiary, #fff);
 }

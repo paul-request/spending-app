@@ -1,0 +1,36 @@
+.main-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height :44px;
+	overflow: hidden;
+	z-index: 10;
+	padding: 0;
+	background: $brand-secondary;
+	border: none;
+
+	.main-title {
+		padding-left: 40px;
+		padding-right: 40px;
+		display: inline-block;
+		width: 100%;
+		text-align: center;
+		line-height: 44px;
+		color: #fff;
+	}
+
+	.button {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+
+		&.button-left {
+			left: 0;
+		}
+
+		&.button-right {
+			right: 0;
+		}
+	}
+}

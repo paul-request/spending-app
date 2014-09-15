@@ -1,11 +1,16 @@
-<ion-view title="App Title">
-	<ion-nav-buttons side="left">
-		<button ng-click="addNew()" class="button button-icon icon ion-plus brand-tertiary"></button>
-	</ion-nav-buttons>
-	<ion-nav-buttons side="right">
-		<button menu-toggle="right" class="button button-icon icon ion-navicon-round brand-secondary"></button>
-	</ion-nav-buttons>
+<ion-view title="">
 	<ion-content class="has-header">
-		<p>Hello world!</p>
+		<div class="panel">
+			<div ng-show="transactions">
+				<h2>Recent transactions</h2>
+				<ion-list>
+		        	<ion-item ng-repeat="item in master.transactions" item="item" href="#/transactions/{{item.id}}">
+		        		Item {{ item.id }}
+		          		<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
+		        	</ion-item>
+		      	</ion-list>
+	      	</div>
+	      	<p ng-hide="transactions">You haven't added any transactions yet. <a href="#/new">Add your first transaction</a>.</p>
+	    </div>
 	</ion-content>
 </ion-view>

@@ -9,31 +9,60 @@
 
 	&.brand-primary {
 		&.activated {
-			@include button-style($brand-primary, $brand-light);
+			@include button-style($brand-primary, #fff);
 		}
 
 		&:hover {
-			@include button-style($brand-primary, $brand-light);
+			@include button-style($brand-primary, #fff);
 		}
 	}
 
 	&.brand-secondary {
 		&.activated {
-			@include button-style($brand-secondary, $brand-light);
+			@include button-style($brand-secondary, #fff);
 		}
 
 		&:hover {
-			@include button-style($brand-secondary, $brand-light);
+			@include button-style($brand-secondary, #fff);
 		}
 	}
 
 	&.brand-tertiary {
 		&.activated {
-			@include button-style($brand-tertiary, $brand-light);
+			@include button-style($brand-tertiary, #fff);
 		}
 
 		&:hover {
-			@include button-style($brand-tertiary, $brand-light);
+			@include button-style($brand-tertiary, #fff);
+		}
+	}
+	&.brand-primary-inverse {
+		@include button-style(transparent, $brand-primary);
+
+		&.activated, &:hover {
+			@include button-style(transparent, $brand-primary);
+			border: none;
+			box-shadow: none;
+		}
+	}
+
+	&.brand-secondary-inverse {
+		@include button-style(transparent, $brand-secondary);
+
+		&.activated, &:hover {
+			@include button-style(transparent, $brand-secondary);
+			border: none;
+			box-shadow: none;
+		}
+	}
+
+	&.brand-tertiary-inverse {
+		@include button-style(transparent, $brand-tertiary);
+
+		&.activated, &:hover {
+			@include button-style(transparent, $brand-tertiary);
+			border: none;
+			box-shadow: none;
 		}
 	}
 

@@ -12,11 +12,34 @@
 		padding: 0;
 	}
 
+	&.bar-sub-header {
+		padding: 0;
+		top: 44px;
+		height: 36px;
+	}
 	.title {
 		&+ .right-buttons {
 			top: 0;
 			bottom: 0;
 			right: 0;
+		}
+	}
+}
+
+.has-subnav {
+	.nav-bar {
+		.title {
+			height: 35px;
+			line-height: 36px;
+		}
+
+		.button.back-button {
+			height :36px;
+			width: 36px;
+
+			.icon:before {
+				margin-top: 8px;
+			}
 		}
 	}
 }

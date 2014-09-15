@@ -18,6 +18,10 @@ angular.module('SpendingApp', [
 	'SpendingApp.controllers'
 ])
 
+.constant('$ionicLoadingConfig', {
+	template: 'views/loading.html'
+})
+
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

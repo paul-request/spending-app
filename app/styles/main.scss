@@ -3,11 +3,22 @@
 
 @charset "UTF-8";
 
+.panel {
+	padding: 15px;
+}
+
+.has-subnav .has-header {
+	top: 80px;
+}
+
 @import 
 	"variables",
 	"mixins",
+	"fonts",
 	"brand",
 	"bars",
 	"buttons",
 	"walkthrough",
+	"menu",
+	"header",
 	"device";

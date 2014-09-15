@@ -4,7 +4,7 @@
 
 angular.module('SpendingApp.controllers', [])
 
-.controller('SpendingAppCtrl', function($scope, $state, SpendingUserService) {
+.controller('SpendingAppCtrl', function($rootScope, $scope, $state, SpendingUserService, SpendingDataService) {
 	$scope.isExistingUser = SpendingUserService.isReturningUser();
 
 	if ($scope.isExistingUser) {
@@ -14,14 +14,18 @@ angular.module('SpendingApp.controllers', [])
 		SpendingUserService.setReturningUser();
 		$state.transitionTo('walkthrough');
 	}
+	$rootScope.isSubnavHidden = false;
+	$scope.master = SpendingDataService.get();
 })
 
-.controller('SpendingAppMainCtrl', function($scope, $state) {
+.controller('SpendingHeaderCtrl', function($scope, $state) {
 	$scope.addNew = function() {
 		$state.go('app.new');
 	}
+})
 
-	
+.controller('SpendingAppMainCtrl', function($rootScope, $scope, $state) {
+	$rootScope.isSubnavHidden = true;
 })
 
 .controller('SpendingAppWalkthroughCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
@@ -43,17 +47,15 @@ angular.module('SpendingApp.controllers', [])
 })
 
 .controller('SpendingMenuCtrl', function($scope, $state) {
-	$scope.navigate = function($event) {
-		$event.preventDefault();
-		$state.go($event.currentTarget.getAttribute('data-state'));
-	}
-})
-
-.controller('SpendingAppAddNewCtrl', function($scope) {
 
 })
 
-.controller('SpendingAppTransactionsCtrl', function($scope) {
+.controller('SpendingAppAddNewCtrl', function($rootScope, $scope) {
+	$rootScope.isSubnavHidden = false;
+})
+
+.controller('SpendingAppTransactionsCtrl', function($rootScope, $scope) {
+	$rootScope.isSubnavHidden = false;
 	$scope.items = [
 	    { id: 0 },
 	    { id: 1 },
@@ -70,19 +72,20 @@ angular.module('SpendingApp.controllers', [])
   
 })
 
-.controller('SpendingAppTransactionCtrl', function($scope, $stateParams) {
+.controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams) {
+	$rootScope.isSubnavHidden = false;
 	$scope.id = $stateParams.id;
   
 })
 
-.controller('SpendingAppReportsCtrl', function($scope) {
-
+.controller('SpendingAppReportsCtrl', function($rootScope, $scope) {
+	$rootScope.isSubnavHidden = false;
 })
 
-.controller('SpendingAppSettingsCtrl', function($scope) {
-
+.controller('SpendingAppSettingsCtrl', function($rootScope, $scope) {
+	$rootScope.isSubnavHidden = false;
 })
 
-.controller('SpendingAppErrorCtrl', function($scope) {
-
+.controller('SpendingAppErrorCtrl', function($rootScope, $scope) {
+	$rootScope.isSubnavHidden = false;
 });
