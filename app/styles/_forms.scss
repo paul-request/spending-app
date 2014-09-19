@@ -1,0 +1,40 @@
+label, select, textarea, input {
+	font-family: 'montserratregular', Arial, sans-serif;
+
+	.type-minus & {
+		color: $brand-negative;
+	}
+	.type-plus & {
+		color: $brand-positive;
+	}
+}
+
+button {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.item-input-edit {
+	padding: 11px 16px;
+
+	.icon {
+		&.ion-chevron-right {
+			right: 10px;
+			left: auto;
+			position: absolute;
+		}
+	}
+}
+
+.item-amount {
+	font-size: 20px;
+	line-height: 34px;
+
+	span {
+		height: 34px;
+	}
+	input {
+		font-size: 20px;
+		padding: 0;
+	}
+}
