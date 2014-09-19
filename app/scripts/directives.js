@@ -55,3 +55,34 @@ angular.module('SpendingApp.directives', [])
         }
     };
 })
+
+.directive('amountTransform', function() {
+	var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/;
+	return {
+		restrict: 'A', // only activate on element attribute
+		require: '?ngModel', // get a hold of NgModelController
+		link: function(scope, element, attrs, ngModel) {
+			if (!ngModel) return; // do nothing if no ng-model
+
+			// Specify how UI should be updated
+			ngModel.$render = function() {
+				element.val(parseFloat(ngModel.$viewValue/100).toFixed(2));
+			};
+
+			// Listen for change events to enable binding
+			element.on('keyup change', function() {
+				scope.$apply(read);
+			});
+
+			element.on('blur', function() {
+				scope.$apply(read);
+				ngModel.$render();
+			});
+
+			// Write data to the model
+			function read(value) {
+				ngModel.$setViewValue(parseFloat(element.val()*100));
+			}
+		}
+	};
+});

@@ -1,6 +1,16 @@
-<ion-view title="transaction {{id}}">
+<ion-view title="transaction category">
 	<ion-content padding="true" class="has-header">
-		<h2>Transaction {{id}}</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis architecto hic officia quasi excepturi sequi deleniti maiores consectetur veritatis sint?</p>
+		<h2>{{transaction.description}}</h2>
+		<div class="transaction">
+			<div class="row">
+    			<div class="col"><i class="icon ion-calendar"></i> {{transaction.date.value | dateString}}</div>
+    		</div>
+			<div class="row">
+    			<div class="col">{{ transaction.description }}</div>
+    			<div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[transaction.type=='-']">
+    				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ transaction.amount }}
+    			</div>
+    		</div>
+		</div>
 	</ion-content>
 </ion-view>

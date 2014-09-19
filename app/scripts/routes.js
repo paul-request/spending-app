@@ -17,7 +17,8 @@ angular.module('SpendingApp.routes', [])
 	})
 	.state('app', {
 		abstract: true,
-		templateUrl: 'views/app-layout.html'
+		templateUrl: 'views/app-layout.html',
+		controller: 'SpendingAppCtrl'
 	})
 	.state('app.home', {
 		url: '/home',
@@ -33,6 +34,15 @@ angular.module('SpendingApp.routes', [])
 		views: {
 			'menuContent' :{
 				templateUrl: 'views/new.html',
+				controller: 'SpendingAppAddNewCtrl'
+			}
+		}
+	})
+	.state('app.editdate', {
+		url: '/editdate',
+		views: {
+			'menuContent' :{
+				templateUrl: 'views/edit-date.html',
 				controller: 'SpendingAppAddNewCtrl'
 			}
 		}

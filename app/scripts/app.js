@@ -15,7 +15,8 @@ angular.module('SpendingApp', [
 	'SpendingApp.routes',
 	'SpendingApp.directives',
 	'SpendingApp.services',
-	'SpendingApp.controllers'
+	'SpendingApp.controllers',
+	'ngInputDate'
 ])
 
 .constant('$ionicLoadingConfig', {

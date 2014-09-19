@@ -19,9 +19,9 @@ angular.module('SpendingApp.services', [])
 
 .factory('SpendingDataService', function($http, SpendingMetaService) {
 
-	var storageId = 'spending-',
+	var storageId = 'spending-app-data',
 		dataTemplate = {
-			"id": null,
+			"id": storageId,
             "created": new Date(),
             "modified": new Date(),
 			"transactions": [],
@@ -34,27 +34,26 @@ angular.module('SpendingApp.services', [])
 	 */ 
     var 
     _create = function() {
-		var key = storageId + new Date().valueOf(),
-			defaultObject = angular.extend({}, dataTemplate, {id: key});
-		this.put(key, defaultObject);
-		return blankQuote;
+		var defaultObject = angular.extend({}, dataTemplate, {id: storageId});
+		put(defaultObject);
+		return defaultObject;
 	},
 	/**
      * Retrieve the quote with the key passed in from local storage
      * @param {string} key - the unique key of the quote stored
      * @returns {object} - the JSON object representation of the quote
      */ 
-	get = function(key) {
-		return JSON.parse(localStorage.getItem(key)) || _create();
+	get = function() {
+		return JSON.parse(localStorage.getItem(storageId)) || _create();
 	},
 	/**
      * Save a quote to local storage
      * @param {string} key - the unique key of the quote to be saved
      * @param {object} quote - the quote to be saved
      */ 
-	put = function(key, data) {
-        transaction.modified = new Date();
-		localStorage.setItem(key, JSON.stringify(data));
+	put = function(data) {
+        data.modified = new Date();
+		localStorage.setItem(storageId, JSON.stringify(data));
 	},
     
     /**
@@ -63,28 +62,47 @@ angular.module('SpendingApp.services', [])
      */ 
 	destroy = function(key) {
 		localStorage.removeItem(key);
-	}
+	},
+
+    getTransaction = function(id) {
+        var transactions = get().transactions;
+        return transactions.filter(function(obj) {
+            return obj.id == id;
+        });
+    }
 
 	return {
         get: get,
 		put: put,
-        destroy: destroy
+        destroy: destroy,
+        getTransaction: getTransaction
 	}
 })
 
 .factory('SpendingMetaService', function() {
 	var meta = {
-		categories: [
-			{
-				name: 'Food & Drink',
-				children: [
-					{name: 'Lunch'},
-					{name: 'Pub'}
-				]
-			},
-			{name: 'Bills'}
-		]
-	};
+    		categories: [
+    			{
+    				name: 'Food & Drink',
+    				children: [
+    					{name: 'Lunch'},
+    					{name: 'Pub'}
+    				]
+    			},
+    			{name: 'Bills'}
+    		],
+            currency: '£'
+    	},
+        templates = {
+            transaction: {
+                type: '-',
+                description: '',
+                amount: 0,
+                date: {
+                    value: new Date()
+                }
+            }
+        }
 
     return {
         /**
@@ -98,6 +116,10 @@ angular.module('SpendingApp.services', [])
             } else {
                 return meta;
             }     
+        },
+
+        getTemplate: function(key) {
+            return templates[key] || {};
         }
     }
 })

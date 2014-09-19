@@ -1,6 +1,28 @@
 <ion-view title="Add new">
 	<ion-content padding="true" class="has-header">
-		<h2>Add new view</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis architecto hic officia quasi excepturi sequi deleniti maiores consectetur veritatis sint?</p>
+		<div class="list-inline list-inline-income-type">
+			<label class="item item-radio">
+				<input type="radio" name="type" class="type-minus" ng-model="transaction.type" value="-">
+				<div class="item-content">-</div>
+			</label><label class="item item-radio">
+				<input type="radio" name="type" class="type-plus" ng-model="transaction.type" value="+">
+				<div class="item-content">+</div>
+			</label>
+		</div>
+		<div class="list">
+			<label class="item item-input item-amount" ng-class="{true: 'type-minus', false: 'type-plus'}[transaction.type=='-']">
+				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span><input type="number" placeholder="0.00" ng-model="transaction.amount" amount-transform>
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="Description" ng-model="transaction.description">
+			</label>
+			<a href="" class="item item-input item-input-edit" ng-click="editDate()">
+				<i class="icon ion-calendar placeholder-icon"></i>
+				<span>{{transaction.date.value | dateString}}</span>
+				<i class="icon ion-chevron-right"></i>
+			</a>
+		</div>
+		<button class="button button-block brand-secondary" ng-click="addTransaction()">Add</button>
+		<pre>{{master}}</pre>
 	</ion-content>
 </ion-view>

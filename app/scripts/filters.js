@@ -42,3 +42,21 @@ angular.module('SpendingApp.filters', [])
 	    }
 	}
 })
+
+.filter('dateString', function($filter) {
+	return function(date) {
+		var 
+		date = $filter('date')(date, 'd MMM yy'),
+		seconds = Math.round((+new Date() - new Date(date)) / 1000);
+
+		if (seconds < 86400) {
+			return 'Today';
+		}
+
+		if (seconds < 172800) {
+			return 'Yesterday';
+		}
+
+		return date;
+	}
+})

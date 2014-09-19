@@ -50,32 +50,33 @@ angular.module('SpendingApp.controllers', [])
 
 })
 
-.controller('SpendingAppAddNewCtrl', function($rootScope, $scope) {
+.controller('SpendingAppAddNewCtrl', function($rootScope, $scope, $state, SpendingDataService, SpendingMetaService) {
 	$rootScope.isSubnavHidden = false;
+	$scope.transaction = SpendingMetaService.getTemplate('transaction');
+
+	$scope.editDate = function() {
+		$state.go('app.editdate');
+	}
+	$scope.editComplete = function() {
+		$state.go('app.new');
+	}
+	$scope.addTransaction = function() {
+		var transactionCount = $scope.master.transactions.length;
+		$scope.transaction.id = transactionCount+1;
+		$scope.master.transactions.push($scope.transaction);
+		SpendingDataService.put($scope.master);
+		$scope.transaction = SpendingMetaService.getTemplate('transaction');
+		$state.go('app.transactions');
+	}
 })
 
 .controller('SpendingAppTransactionsCtrl', function($rootScope, $scope) {
 	$rootScope.isSubnavHidden = false;
-	$scope.items = [
-	    { id: 0 },
-	    { id: 1 },
-	    { id: 2 },
-	    { id: 3 },
-	    { id: 4 },
-	    { id: 5 },
-	    { id: 6 },
-	    { id: 7 },
-	    { id: 8 },
-	    { id: 9 },
-	    { id: 10 }
-	];
-  
 })
 
-.controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams) {
+.controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams, SpendingDataService) {
 	$rootScope.isSubnavHidden = false;
-	$scope.id = $stateParams.id;
-  
+	$scope.transaction = SpendingDataService.getTransaction($stateParams.id)[0]; 
 })
 
 .controller('SpendingAppReportsCtrl', function($rootScope, $scope) {

@@ -1,12 +1,13 @@
 <ion-view title="Reports">
 	<ion-content padding="true" class="has-header">
 		<h2>Transactions view</h2>
-		<ion-list ng-show="transactions">
-        	<ion-item ng-repeat="item in master.transactions" item="item" href="#/transactions/{{item.id}}">
-        		Item {{ item.id }}
-          		<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
-        	</ion-item>
-      	</ion-list>
-      	<p ng-hide="transactions">You haven't added any transactions yet. <a href="#/new">Add your first transaction</a>.</p>
+		<ion-list ng-show="master.transactions">
+    	<ion-item ng-repeat="item in master.transactions track by $index" item="item" href="#/transactions/{{item.id}}">
+    		{{ item.description }}
+        <i class="icon ion-chevron-right"></i>
+      	<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
+    	</ion-item>
+  	</ion-list>
+  	<p ng-hide="master.transactions">You haven't added any transactions yet. <a href="#/new">Add your first transaction</a>.</p>
 	</ion-content>
 </ion-view>

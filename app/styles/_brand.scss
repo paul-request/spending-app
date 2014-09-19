@@ -28,3 +28,9 @@
 .brand-tertiary {
 	@include button-style($brand-tertiary, #fff);
 }
+.type-minus {
+	color: $brand-negative;
+}
+.type-plus {
+	color: $brand-positive;
+}

@@ -11,14 +11,20 @@
 	top: 80px;
 }
 
+.text-right {
+	text-align: right;
+}
+
 @import 
 	"variables",
 	"mixins",
 	"fonts",
+	"list-inline",
 	"brand",
 	"bars",
 	"buttons",
 	"walkthrough",
 	"menu",
 	"header",
+	"forms",
 	"device";
