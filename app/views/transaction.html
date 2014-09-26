@@ -8,7 +8,7 @@
 			<div class="row">
     			<div class="col">{{ transaction.description }}</div>
     			<div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[transaction.type=='-']">
-    				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ transaction.amount }}
+    				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ transaction.amount | displayPrice }}
     			</div>
     		</div>
 		</div>

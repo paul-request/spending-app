@@ -1,0 +1,19 @@
+<ion-view title="Choose category">
+	<ion-content padding="true" class="has-header">
+		<div class="list">
+			<div ng-repeat="category in master.meta.categories">
+				<ion-item class="item-icon-left" ng-click="toggleCategory(category)" ng-class="{'is-active': isSelectedCategory(category)}">
+					<i class="icon {{ category.classicon }}"></i>
+					{{ category.name }}
+				</ion-item>
+				<div class="sub-cats" ng-show="isSelectedCategory(category)">
+					<ion-radio ng-repeat="sub in category.children" name="category" ng-model="current.transaction.category" ng-value="sub.name">
+						{{ sub.name }}
+					</ion-radio>
+				</div>
+			</div>
+		</div>
+		<button class="button button-block brand-secondary" ng-click="editComplete()">Done</button>
+		<pre>{{current.transaction}}</pre>
+	</ion-content>
+</ion-view>

@@ -43,7 +43,16 @@ angular.module('SpendingApp.routes', [])
 		views: {
 			'menuContent' :{
 				templateUrl: 'views/edit-date.html',
-				controller: 'SpendingAppAddNewCtrl'
+				controller: 'SpendingAppEditDateCtrl'
+			}
+		}
+	})
+	.state('app.editcategory', {
+		url: '/editcategory',
+		views: {
+			'menuContent' :{
+				templateUrl: 'views/edit-category.html',
+				controller: 'SpendingAppEditCategoryCtrl'
 			}
 		}
 	})

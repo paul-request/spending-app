@@ -492,7 +492,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', 'building your application', function (target){
-    if( target === ''){
+    if( target === '' || typeof target === 'undefined'){
       grunt.task.run([
         'clean:dist',
         'wiredep',

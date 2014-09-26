@@ -1,28 +1,36 @@
 <ion-view title="Add new">
 	<ion-content padding="true" class="has-header">
-		<div class="list-inline list-inline-income-type">
-			<label class="item item-radio">
-				<input type="radio" name="type" class="type-minus" ng-model="transaction.type" value="-">
-				<div class="item-content">-</div>
-			</label><label class="item item-radio">
-				<input type="radio" name="type" class="type-plus" ng-model="transaction.type" value="+">
-				<div class="item-content">+</div>
-			</label>
-		</div>
-		<div class="list">
-			<label class="item item-input item-amount" ng-class="{true: 'type-minus', false: 'type-plus'}[transaction.type=='-']">
-				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span><input type="number" placeholder="0.00" ng-model="transaction.amount" amount-transform>
-			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="Description" ng-model="transaction.description">
-			</label>
-			<a href="" class="item item-input item-input-edit" ng-click="editDate()">
-				<i class="icon ion-calendar placeholder-icon"></i>
-				<span>{{transaction.date.value | dateString}}</span>
-				<i class="icon ion-chevron-right"></i>
-			</a>
-		</div>
-		<button class="button button-block brand-secondary" ng-click="addTransaction()">Add</button>
-		<pre>{{master}}</pre>
+		<ion-nav-view name="formContent" animation="slide-left-right">
+			<form ng-model="current.transaction" name="itemform" novalidate>
+				<div class="list-inline list-inline-income-type">
+					<label class="item item-radio">
+						<input type="radio" name="type" class="type-minus" ng-model="current.transaction.type" value="-">
+						<div class="item-content">-</div>
+					</label><label class="item item-radio">
+						<input type="radio" name="type" class="type-plus" ng-model="current.transaction.type" value="+">
+						<div class="item-content">+</div>
+					</label>
+				</div>
+				<div class="list">
+					<label class="item item-input item-amount" ng-class="{true: 'type-minus', false: 'type-plus'}[current.transaction.type=='-']">
+						<span ng-show="current.transaction.type=='-'">-</span><span>{{master.meta.currency}}</span><input type="number" ng-attr-data-placeholder="0.00" ng-model="current.transaction.amount" amount-transform price-placeholder required>
+					</label>
+					<label class="item item-input">
+						<input type="text" placeholder="Description" ng-model="current.transaction.description" required>
+					</label>
+					<a href="" class="item item-input item-input-edit" ng-click="editDate()">
+						<i class="icon ion-calendar placeholder-icon"></i>
+						<span>{{current.transaction.date.value | dateString}}</span>
+						<i class="icon ion-ios7-arrow-forward icon-right"></i>
+					</a>
+					<a href="" class="item item-input item-input-edit" ng-click="editCategory()">
+						<input type="hidden" ng-model="current.transaction.category" required>
+						<span ng-hide="!current.transaction.category">Category:</span><span> {{current.transaction.category || 'Choose category'}}</span>
+						<i class="icon ion-ios7-arrow-forward icon-right"></i>
+					</a>
+				</div>
+			</form>
+			<button class="button button-block brand-secondary" ng-click="addTransaction()" ng-disabled="itemform.$invalid">Add</button>
+		</ion-nav-view>
 	</ion-content>
 </ion-view>

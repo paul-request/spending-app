@@ -21,11 +21,12 @@ angular.module('SpendingApp.services', [])
 
 	var storageId = 'spending-app-data',
 		dataTemplate = {
-			"id": storageId,
-            "created": new Date(),
-            "modified": new Date(),
-			"transactions": [],
-			"meta": SpendingMetaService.get()
+			id: storageId,
+            created: new Date(),
+            modified: new Date(),
+            currentTransaction: {},
+			transactions: [],
+			meta: SpendingMetaService.get()
 		};
 
 	/**
@@ -55,6 +56,13 @@ angular.module('SpendingApp.services', [])
         data.modified = new Date();
 		localStorage.setItem(storageId, JSON.stringify(data));
 	},
+
+    putTransaction = function(transaction) {
+        var data = get();
+        data.modified = new Date();
+        data.transactions.push(transaction);
+        localStorage.setItem(storageId, JSON.stringify(data));
+    },
     
     /**
      * Remove a quote from local storage
@@ -69,27 +77,111 @@ angular.module('SpendingApp.services', [])
         return transactions.filter(function(obj) {
             return obj.id == id;
         });
+    },
+
+    getGroupedTransactions = function() {
+        var transactions = get().transactions,
+            sortedGroups = _.sortBy(_.groupBy(transactions, function(t) {
+            return new Date(t.date.value).getTime();
+        }), function(o, key) {
+            return -key;
+        });
+
+        return sortedGroups;
     }
 
 	return {
         get: get,
 		put: put,
         destroy: destroy,
-        getTransaction: getTransaction
+        getTransaction: getTransaction,
+        putTransaction: putTransaction,
+        getGroupedTransactions: getGroupedTransactions
 	}
 })
 
 .factory('SpendingMetaService', function() {
 	var meta = {
-    		categories: [
-    			{
+    		categories: [{
     				name: 'Food & Drink',
+                    classicon: 'ion-beer',
     				children: [
     					{name: 'Lunch'},
-    					{name: 'Pub'}
+    					{name: 'Pub'},
+                        {name: 'Dinner'}
     				]
-    			},
-    			{name: 'Bills'}
+    			}, {
+                    name: 'Utilities',
+                    classicon: 'ion-flame',
+                    children: [
+                        {name: 'Gas'},
+                        {name: 'Electricity'},
+                        {name: 'Dual Fuel'},
+                        {name: 'Telephone'},
+                        {name: 'Broadband'}
+                    ]
+                }, {
+                    name: 'Shopping',
+                    classicon: 'ion-bag',
+                    children: [
+                        {name: 'Clothes'},
+                        {name: 'Shoes'},
+                        {name: 'Gadgets'}
+                    ]
+                }, {
+                    name: 'Vacations',
+                    classicon: 'ion-plane',
+                    children: [
+                        {name: 'Flights'},
+                        {name: 'Hotel'},
+                        {name: 'Package'},
+                        {name: 'Foreign currency'}
+                    ]
+                }, {
+                    name: 'Transport',
+                    classicon: 'ion-map',
+                    children: [
+                        {name: 'Train'},
+                        {name: 'Bus'},
+                        {name: 'Tube'},
+                        {name: 'Tram'},
+                        {name: 'Flight'},
+                        {name: 'Taxi'}
+                    ]
+                }, {
+                    name: 'Hobbies',
+                    classicon: 'ion-ios7-tennisball',
+                    children: [
+                        {name: 'Sports club'},
+                        {name: 'Gym membership'},
+                        {name: 'Insurance'},
+                        {name: 'Service'},
+                        {name: 'Repairs'},
+                        {name: 'New vehicle'}
+                    ]
+                }, {
+                    name: 'Car',
+                    classicon: 'ion-model-s',
+                    children: [
+                        {name: 'MOT'},
+                        {name: 'Tax'},
+                        {name: 'Insurance'},
+                        {name: 'Service'},
+                        {name: 'Repairs'},
+                        {name: 'New vehicle'}
+                    ]
+                }, {
+                    name: 'Entertainment',
+                    classicon: 'ion-film-marker',
+                    children: [
+                        {name: 'Cinema'},
+                        {name: 'Show'},
+                        {name: 'Musical'},
+                        {name: 'Opera'},
+                        {name: 'Sport'},
+                        {name: 'Comedy'}
+                    ]
+                }
     		],
             currency: '£'
     	},

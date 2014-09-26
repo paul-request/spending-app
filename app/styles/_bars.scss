@@ -16,6 +16,7 @@
 		padding: 0;
 		top: 44px;
 		height: 36px;
+		border-bottom: 1px solid lighten($brand-primary, 40%);
 	}
 	.title {
 		&+ .right-buttons {

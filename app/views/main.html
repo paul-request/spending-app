@@ -4,21 +4,22 @@
 			<div ng-show="master.transactions">
 				<h2>Recent transactions</h2>
 				<ion-list>
-		        	<ion-item ng-repeat="item in master.transactions track by $index" item="item" href="#/transactions/{{item.id}}">
-		        		<div class="transaction">
-		        			<div class="row">
-			        			<div class="col">{{ item.description }}</div>
-			        			<div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[transaction.type=='-']">
-			        				<span ng-show="transaction.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ item.amount }}
-			        			</div>
+					<div ng-repeat="(key, transaction) in groups | limitTo: 3">
+						<div class="item item-divider">{{transaction[0].date.value | dateString}}</div>
+			        	<ion-item ng-repeat="item in transaction" item="item" href="#/transactions/{{item.id}}">
+			        		<div class="transaction">
+			        			<div class="row">
+				        			<div class="col">{{ item.description }}</div>
+				        			<div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[item.type=='-']">
+				        				<span ng-show="item.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ item.amount | displayPrice }}
+				        			</div>
+				        		</div>
 			        		</div>
-		        		</div>
-		        		<i class="icon ion-chevron-right"></i>
-		        	</ion-item>
+			        	</ion-item>
+			        </div>
 		      	</ion-list>
 	      	</div>
 	      	<p ng-hide="master.transactions">You haven't added any transactions yet. <a href="#/new">Add your first transaction</a>.</p>
 	    </div>
-	    <pre>{{master}}</pre>
 	</ion-content>
 </ion-view>

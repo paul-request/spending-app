@@ -60,3 +60,9 @@ angular.module('SpendingApp.filters', [])
 		return date;
 	}
 })
+
+.filter('displayPrice', function($filter) {
+	return function(price) {
+		return parseFloat(price/100).toFixed(2);
+	}
+})

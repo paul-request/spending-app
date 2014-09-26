@@ -1,12 +1,21 @@
-<ion-view title="Reports">
+<ion-view title="Transactions">
 	<ion-content padding="true" class="has-header">
-		<h2>Transactions view</h2>
 		<ion-list ng-show="master.transactions">
-    	<ion-item ng-repeat="item in master.transactions track by $index" item="item" href="#/transactions/{{item.id}}">
-    		{{ item.description }}
-        <i class="icon ion-chevron-right"></i>
-      	<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
-    	</ion-item>
+      <div ng-repeat="(key, transaction) in groups">
+        <div class="item item-divider">{{transaction[0].date.value | dateString}}</div>
+      	<ion-item ng-repeat="item in transaction | orderBy: '-date.value'" item="item" href="#/transactions/{{item.id}}" class="item-icon-right">
+      		<div class="transaction">
+            <div class="row">
+              <div class="col">{{ item.description }}</div>
+              <div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[item.type=='-']">
+                <span ng-show="item.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ item.amount | displayPrice }}
+              </div>
+            </div>
+          </div>
+          <i class="icon ion-ios7-arrow-forward"></i>
+        	<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
+      	</ion-item>
+      </div>
   	</ion-list>
   	<p ng-hide="master.transactions">You haven't added any transactions yet. <a href="#/new">Add your first transaction</a>.</p>
 	</ion-content>

@@ -59,8 +59,8 @@ angular.module('SpendingApp.directives', [])
 .directive('amountTransform', function() {
 	var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))\s*$/;
 	return {
-		restrict: 'A', // only activate on element attribute
-		require: '?ngModel', // get a hold of NgModelController
+		restrict: 'A',
+		require: '?ngModel',
 		link: function(scope, element, attrs, ngModel) {
 			if (!ngModel) return; // do nothing if no ng-model
 
@@ -83,6 +83,21 @@ angular.module('SpendingApp.directives', [])
 			function read(value) {
 				ngModel.$setViewValue(parseFloat(element.val()*100));
 			}
+		}
+	};
+})
+
+.directive('pricePlaceholder', function() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs, ngModel) {
+			var placeholder = attrs.placeholder;
+			element.on('focus', function() {
+				if (element.val() === placeholder) {
+					element.val('');
+				}
+			});
+
 		}
 	};
 });

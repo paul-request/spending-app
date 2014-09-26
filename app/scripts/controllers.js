@@ -4,7 +4,7 @@
 
 angular.module('SpendingApp.controllers', [])
 
-.controller('SpendingAppCtrl', function($rootScope, $scope, $state, SpendingUserService, SpendingDataService) {
+.controller('SpendingAppCtrl', function($rootScope, $scope, $state, SpendingUserService, SpendingDataService, SpendingMetaService) {
 	$scope.isExistingUser = SpendingUserService.isReturningUser();
 
 	if ($scope.isExistingUser) {
@@ -16,6 +16,9 @@ angular.module('SpendingApp.controllers', [])
 	}
 	$rootScope.isSubnavHidden = false;
 	$scope.master = SpendingDataService.get();
+	$scope.current = {
+		transaction: angular.copy(SpendingMetaService.getTemplate('transaction'))
+	};
 })
 
 .controller('SpendingHeaderCtrl', function($scope, $state) {
@@ -24,8 +27,9 @@ angular.module('SpendingApp.controllers', [])
 	}
 })
 
-.controller('SpendingAppMainCtrl', function($rootScope, $scope, $state) {
+.controller('SpendingAppMainCtrl', function($rootScope, $scope, $state, $filter, SpendingDataService) {
 	$rootScope.isSubnavHidden = true;
+	$scope.groups = SpendingDataService.getGroupedTransactions();
 })
 
 .controller('SpendingAppWalkthroughCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
@@ -52,26 +56,50 @@ angular.module('SpendingApp.controllers', [])
 
 .controller('SpendingAppAddNewCtrl', function($rootScope, $scope, $state, SpendingDataService, SpendingMetaService) {
 	$rootScope.isSubnavHidden = false;
-	$scope.transaction = SpendingMetaService.getTemplate('transaction');
 
 	$scope.editDate = function() {
-		$state.go('app.editdate');
+		$state.transitionTo('app.editdate');
 	}
-	$scope.editComplete = function() {
-		$state.go('app.new');
+
+	$scope.editCategory = function() {
+		$state.transitionTo('app.editcategory');
 	}
+	
 	$scope.addTransaction = function() {
 		var transactionCount = $scope.master.transactions.length;
-		$scope.transaction.id = transactionCount+1;
-		$scope.master.transactions.push($scope.transaction);
-		SpendingDataService.put($scope.master);
-		$scope.transaction = SpendingMetaService.getTemplate('transaction');
+		$scope.current.transaction.id = transactionCount+1;
+		$scope.master.transactions.push($scope.current.transaction);
+		SpendingDataService.putTransaction($scope.current.transaction);
+		$scope.current.transaction = angular.copy(SpendingMetaService.getTemplate('transaction'));
 		$state.go('app.transactions');
 	}
 })
 
-.controller('SpendingAppTransactionsCtrl', function($rootScope, $scope) {
+.controller('SpendingAppEditDateCtrl', function($scope, $state) {
+	$scope.editComplete = function() {
+		$state.transitionTo('app.new');
+	}
+})
+
+.controller('SpendingAppEditCategoryCtrl', function($scope, $state) {
+	$scope.editComplete = function() {
+		$state.transitionTo('app.new');
+	}
+	$scope.toggleCategory = function(category) {
+		if ($scope.isSelectedCategory(category)) {
+			$scope.selectedCategory = null;
+		} else {
+			$scope.selectedCategory = category;
+		}
+	};
+	$scope.isSelectedCategory = function(category) {
+		return $scope.selectedCategory === category;
+	};
+})
+
+.controller('SpendingAppTransactionsCtrl', function($rootScope, $scope, SpendingDataService) {
 	$rootScope.isSubnavHidden = false;
+	$scope.groups = SpendingDataService.getGroupedTransactions();
 })
 
 .controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams, SpendingDataService) {
