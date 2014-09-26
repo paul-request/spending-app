@@ -46,7 +46,7 @@ angular.module('SpendingApp.filters', [])
 .filter('dateString', function($filter) {
 	return function(date) {
 		var 
-		date = $filter('date')(date, 'd MMM yy'),
+		date = $filter('date')(date, 'd MMMM yyyy'),
 		seconds = Math.round((+new Date() - new Date(date)) / 1000);
 
 		if (seconds < 86400) {
@@ -64,5 +64,17 @@ angular.module('SpendingApp.filters', [])
 .filter('displayPrice', function($filter) {
 	return function(price) {
 		return parseFloat(price/100).toFixed(2);
+	}
+})
+
+.filter('categoryIcon', function($filter, SpendingMetaService) {
+	return function(category) {
+		return SpendingMetaService.getCategoryIcon(category);
+	}
+})
+
+.filter('categoryParent', function($filter, SpendingMetaService) {
+	return function(category) {
+		return SpendingMetaService.getCategoryParent(category);
 	}
 })

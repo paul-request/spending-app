@@ -1,0 +1,34 @@
+.category {
+	background: $brand-border-bg;
+	border-top: $brand-border;
+	border-left: $brand-border;
+	border-right: $brand-border;
+	color: $brand-secondary;
+	width: 140px;
+	margin: 10px auto 0;
+	padding: 25px 0 10px;
+	border-radius: 70px 70px 0 0;
+	z-index: 5;
+	bottom: -2px;
+	position: relative;
+
+	.icon {
+		display: block;
+		width: 50px;
+		height: 50px;
+		margin: 0 auto;
+		font-size: 50px;
+		text-align: center;
+
+		&:before {
+			width: 50px;
+			height: 50px;
+			text-align: center;
+		}
+	}
+	.category-name {
+		display: block;
+		text-align: center;
+		padding: 5px 10px;
+	}
+}

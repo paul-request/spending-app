@@ -3,10 +3,11 @@
 		<ion-list ng-show="master.transactions">
       <div ng-repeat="(key, transaction) in groups">
         <div class="item item-divider">{{transaction[0].date.value | dateString}}</div>
-      	<ion-item ng-repeat="item in transaction | orderBy: '-date.value'" item="item" href="#/transactions/{{item.id}}" class="item-icon-right">
+      	<ion-item ng-repeat="item in transaction | orderBy: '-date.value'" item="item" href="#/transactions/{{item.id}}" class="item-icon-left item-icon-right">
+          <i class='icon {{item.category | categoryIcon}}'></i>
       		<div class="transaction">
             <div class="row">
-              <div class="col">{{ item.description }}</div>
+              <div class="col"> {{ item.description }}</div>
               <div class="col text-right" ng-class="{true: 'type-minus', false: 'type-plus'}[item.type=='-']">
                 <span ng-show="item.type=='-'">-</span><span>{{master.meta.currency}}</span>{{ item.amount | displayPrice }}
               </div>

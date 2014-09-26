@@ -17,7 +17,7 @@ angular.module('SpendingApp.services', [])
 	}
 })
 
-.factory('SpendingDataService', function($http, SpendingMetaService) {
+.factory('SpendingDataService', function($http, $filter, SpendingMetaService) {
 
 	var storageId = 'spending-app-data',
 		dataTemplate = {
@@ -81,11 +81,12 @@ angular.module('SpendingApp.services', [])
 
     getGroupedTransactions = function() {
         var transactions = get().transactions,
-            sortedGroups = _.sortBy(_.groupBy(transactions, function(t) {
-            return new Date(t.date.value).getTime();
-        }), function(o, key) {
-            return -key;
-        });
+            groups = _.groupBy(transactions, function(t) {
+                return $filter('date')(t.date.value, 'yyyyMMdd');
+            }),
+            sortedGroups = _.sortBy(groups, function(o, key) {
+                return -key;
+            })
 
         return sortedGroups;
     }
@@ -212,6 +213,23 @@ angular.module('SpendingApp.services', [])
 
         getTemplate: function(key) {
             return templates[key] || {};
+        },
+
+        getCategory: function(name) {
+            var categories = this.get('categories');
+            return _.filter(categories, function(cat){
+                return _.some(cat.children, function(child){
+                    return child.name === name;
+                });
+            });
+        },
+
+        getCategoryIcon: function(name) {
+            return this.getCategory(name)[0].classicon;
+        },
+
+        getCategoryParent: function(name) {
+            return this.getCategory(name)[0].name;
         }
     }
 })

@@ -102,9 +102,9 @@ angular.module('SpendingApp.controllers', [])
 	$scope.groups = SpendingDataService.getGroupedTransactions();
 })
 
-.controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams, SpendingDataService) {
+.controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams, SpendingDataService, SpendingMetaService) {
 	$rootScope.isSubnavHidden = false;
-	$scope.transaction = SpendingDataService.getTransaction($stateParams.id)[0]; 
+	$scope.transaction = SpendingDataService.getTransaction($stateParams.id)[0];
 })
 
 .controller('SpendingAppReportsCtrl', function($rootScope, $scope) {

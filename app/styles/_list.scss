@@ -1,6 +1,6 @@
 .list {
 	.item {
-		border-color: lighten($brand-primary, 40%);
+		border-color: $border-color;
 
 		&.is-active {
 			background: $brand-primary;
@@ -9,7 +9,7 @@
 	}
 	.item-divider {
 		text-transform: uppercase;
-		background: lighten($brand-primary, 45%);
+		background: $brand-border-bg;
 	}
 	.item-icon-left {
 		.icon {
@@ -25,9 +25,9 @@
 
 	.sub-cats {
 		padding: 10px 10px 4px;
-		background: lighten($brand-primary, 45%);
-		border-left: 1px solid lighten($brand-primary, 40%);
-		border-right: 1px solid lighten($brand-primary, 40%);
+		background: $brand-border-bg;
+		border-left: $brand-border;
+		border-right: $brand-border;
 
 		.item {
 			display: inline-block;

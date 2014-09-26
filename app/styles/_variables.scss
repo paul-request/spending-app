@@ -13,3 +13,7 @@ $brand-darker-gray:				darken($brand-gray,30%);
 
 $brand-negative:				#A92214;
 $brand-positive:				#048340;
+
+$border-color:					lighten($brand-primary, 40%);
+$brand-border:					1px solid $border-color;
+$brand-border-bg:				lighten($brand-primary, 45%); 		
