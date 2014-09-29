@@ -3,7 +3,7 @@
 		<ion-list ng-show="master.transactions">
       <div ng-repeat="(key, transaction) in groups">
         <div class="item item-divider">{{transaction[0].date.value | dateString}}</div>
-      	<ion-item ng-repeat="item in transaction | orderBy: '-date.value'" item="item" href="#/transactions/{{item.id}}" class="item-icon-left item-icon-right">
+      	<ion-item ng-repeat="item in transaction track by $index | orderBy: '-date.value'" item="item" href="#/transactions/{{item.id}}" class="item-icon-left item-icon-right">
           <i class='icon {{item.category | categoryIcon}}'></i>
       		<div class="transaction">
             <div class="row">
@@ -14,7 +14,7 @@
             </div>
           </div>
           <i class="icon ion-ios7-arrow-forward"></i>
-        	<ion-option-button class="button-assertive" ng-click="delete(item)">Delete</ion-option-button>
+        	<ion-option-button class="button-assertive" ng-click="deleteTransaction(item, $index)">Delete</ion-option-button>
       	</ion-item>
       </div>
   	</ion-list>

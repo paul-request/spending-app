@@ -5,7 +5,8 @@
     "angular": "~1.2.0",
     "angular-ui-router": "latest",
     "ionic": "1.0.0-beta.11",
-    "angular-input-date": "~1.0.3"
+    "angular-input-date": "~1.0.3",
+    "underscore": "~1.7.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

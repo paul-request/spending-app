@@ -59,9 +59,9 @@ angular.module('SpendingApp.services', [])
 
     putTransaction = function(transaction) {
         var data = get();
-        data.modified = new Date();
+        transaction.id = 'transaction' + (getTransactionCount()+1);
         data.transactions.push(transaction);
-        localStorage.setItem(storageId, JSON.stringify(data));
+        put(data);
     },
     
     /**
@@ -73,14 +73,18 @@ angular.module('SpendingApp.services', [])
 	},
 
     getTransaction = function(id) {
-        var transactions = get().transactions;
+        var transactions = getTransactions();
         return transactions.filter(function(obj) {
             return obj.id == id;
         });
     },
 
+    getTransactions = function() {
+        return get().transactions;
+    },
+
     getGroupedTransactions = function() {
-        var transactions = get().transactions,
+        var transactions = getTransactions(),
             groups = _.groupBy(transactions, function(t) {
                 return $filter('date')(t.date.value, 'yyyyMMdd');
             }),
@@ -89,6 +93,24 @@ angular.module('SpendingApp.services', [])
             })
 
         return sortedGroups;
+    },
+
+    deleteTransaction = function(id) {
+        var matchedIndex = null,
+            data = get();
+        var transactions = _.reject(data.transactions, function(t, index, list) {
+            if (t.id === id) {
+                matchedIndex = index;
+            }
+            return t.id === id;
+        });
+        data.transactions = transactions;
+        put(data);
+        return matchedIndex;
+    },
+
+    getTransactionCount = function() {
+         return _.size(getTransactions());
     }
 
 	return {
@@ -97,7 +119,9 @@ angular.module('SpendingApp.services', [])
         destroy: destroy,
         getTransaction: getTransaction,
         putTransaction: putTransaction,
-        getGroupedTransactions: getGroupedTransactions
+        getGroupedTransactions: getGroupedTransactions,
+        deleteTransaction: deleteTransaction,
+        getTransactionCount : getTransactionCount
 	}
 })
 
@@ -154,11 +178,7 @@ angular.module('SpendingApp.services', [])
                     classicon: 'ion-ios7-tennisball',
                     children: [
                         {name: 'Sports club'},
-                        {name: 'Gym membership'},
-                        {name: 'Insurance'},
-                        {name: 'Service'},
-                        {name: 'Repairs'},
-                        {name: 'New vehicle'}
+                        {name: 'Gym membership'}
                     ]
                 }, {
                     name: 'Car',

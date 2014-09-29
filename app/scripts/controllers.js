@@ -100,6 +100,12 @@ angular.module('SpendingApp.controllers', [])
 .controller('SpendingAppTransactionsCtrl', function($rootScope, $scope, SpendingDataService) {
 	$rootScope.isSubnavHidden = false;
 	$scope.groups = SpendingDataService.getGroupedTransactions();
+
+	$scope.deleteTransaction = function(transaction) {
+		var index = SpendingDataService.deleteTransaction(transaction.id);
+		$scope.master.transactions.splice(index, 1);
+		$scope.groups = SpendingDataService.getGroupedTransactions();
+	}
 })
 
 .controller('SpendingAppTransactionCtrl', function($rootScope, $scope, $stateParams, SpendingDataService, SpendingMetaService) {
